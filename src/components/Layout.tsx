@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "gatsby";
+import { Link, useStaticQuery, graphql } from "gatsby";
 
 interface LayoutProps {
   title: string;
@@ -7,8 +7,18 @@ interface LayoutProps {
 }
 
 export default function Layout({ title, children }: LayoutProps) {
+  const data = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          title
+        }
+      }
+    }
+  `);
   return (
     <div>
+      <header>{data.site.siteMetadata.title}</header>
       <nav>
         <ul>
           <li>
