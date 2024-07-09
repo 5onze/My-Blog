@@ -1,24 +1,42 @@
 import * as React from "react";
-import type { HeadFC, PageProps } from "gatsby";
+import { graphql, PageProps } from "gatsby";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import Seo from "../components/Seo";
 import { Link } from "gatsby";
 import Layout from "../components/Layout";
-import { StaticImage } from "gatsby-plugin-image";
 
-const IndexPage: React.FC<PageProps> = () => {
+export default function IndexPage({ data }: PageProps<Queries.PostsQuery>) {
   return (
     <Layout title="Welcome my stie!">
       <Link to="/about">About</Link>
       <p>I'm making this by following the Gatsby Tutorial.</p>
-      <StaticImage
-        height={600}
-        alt="Clifford, a reddish-brown pitbull, posing on a couch and looking stoically at the camera"
-        src="../images/Clifford.jpg"
-      />
+      {data.allContentfulPost.nodes.map((post) => (
+        <article>
+          <GatsbyImage
+            image={getImage(post.preview?.gatsbyImageData!)!}
+            alt={post.title!}
+          />
+          <h2>{post.title}</h2>
+          <h4>{post.price}원</h4>
+        </article>
+      ))}
     </Layout>
   );
-};
+}
 
-export default IndexPage;
+export const query = graphql`
+  query Posts {
+    allContentfulPost {
+      nodes {
+        title
+        slug
+        price
+        preview {
+          gatsbyImageData(placeholder: BLURRED, height: 250)
+        }
+      }
+    }
+  }
+`;
 
-export const Head: HeadFC = () => <Seo title="Home" />;
+export const Head = () => <Seo title="Home" />;

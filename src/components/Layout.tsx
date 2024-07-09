@@ -3,7 +3,7 @@ import { Link, useStaticQuery, graphql } from "gatsby";
 
 interface LayoutProps {
   title: string;
-  children: any;
+  children?: any;
 }
 
 export default function Layout({ title, children }: LayoutProps) {
