@@ -5,10 +5,12 @@ import Layout from "../../components/Layout";
 
 export default function Product({ data }: PageProps<Queries.ProductQuery>) {
   const image = getImage(data.contentfulPost?.preview?.gatsbyImageData!);
+
   return (
     <Layout title={data.contentfulPost?.title!}>
       <GatsbyImage image={image!} alt={data.contentfulPost?.title!} />
       <h2>{data.contentfulPost?.price}원</h2>
+      <div></div>
     </Layout>
   );
 }
@@ -20,6 +22,9 @@ export const query = graphql`
       title
       preview {
         gatsbyImageData(placeholder: BLURRED, height: 450)
+      }
+      content {
+        raw
       }
     }
   }

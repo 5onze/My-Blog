@@ -7,31 +7,25 @@ const config: GatsbyConfig = {
   siteMetadata: {
     title: `My Blog`,
     description: `Example project for the Gatsby Head API`,
-    siteUrl: `https://www.yourdomain.tld`,
+    author: `whirlpoolgreen`,
+    siteUrl: `https://5onze.github.io/My-Blog/`,
   },
+  pathPrefix: `/My-Blog`,
   graphqlTypegen: true,
   plugins: [
-    "gatsby-plugin-mdx",
     "gatsby-plugin-sharp",
     "gatsby-plugin-image",
     "gatsby-transformer-sharp",
     {
-      resolve: `gatsby-transformer-remark`,
+      resolve: `gatsby-source-filesystem`,
       options: {
-        // Footnotes mode (default: true)
-        ootnotes: true,
-        // GitHub Flavored Markdown mode (default: true)
-        gfm: true,
-        // Plugins configs
-        plugins: [],
+        path: `${__dirname}/src/pages`,
+        name: "pages",
       },
     },
     {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        name: `blog-posts`,
-        path: `${__dirname}/blog-posts`,
-      },
+      resolve: `gatsby-transformer-remark`,
+      options: {},
     },
     {
       resolve: "gatsby-source-contentful",

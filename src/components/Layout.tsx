@@ -17,7 +17,7 @@ export default function Layout({ title, children }: LayoutProps) {
     }
   `);
   return (
-    <div>
+    <div className="container">
       <header>{data.site.siteMetadata.title}</header>
       <nav>
         <ul>
@@ -26,9 +26,6 @@ export default function Layout({ title, children }: LayoutProps) {
           </li>
           <li>
             <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="/blog">Blog</Link>
           </li>
         </ul>
       </nav>

@@ -9,18 +9,20 @@ export default function IndexPage({ data }: PageProps<Queries.PostsQuery>) {
     <Layout title="Welcome my stie!">
       <Link to="/about">About</Link>
       <p>I'm making this by following the Gatsby Tutorial.</p>
-      {data.allContentfulPost.nodes.map((post) => (
-        <article>
-          <GatsbyImage
-            image={getImage(post.preview?.gatsbyImageData!)!}
-            alt={post.title!}
-          />
-          <Link to={`/products/${post.id}`}>
-            <h2>{post.title}</h2>
-            <h4>{post.price}원</h4>
-          </Link>
-        </article>
-      ))}
+      <div className="grid">
+        {data.allContentfulPost.nodes.map((post) => (
+          <article>
+            <GatsbyImage
+              image={getImage(post.preview?.gatsbyImageData!)!}
+              alt={post.title!}
+            />
+            <Link to={`/products/${post.id}`}>
+              <h2>{post.title}</h2>
+              <h4>{post.price}원</h4>
+            </Link>
+          </article>
+        ))}
+      </div>
     </Layout>
   );
 }
